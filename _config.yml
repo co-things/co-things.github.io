@@ -8,10 +8,10 @@ permalink:           /:title
 relative_permalinks: true
 
 # Setup
-timezone:            your timezone # eg. Asia/Kathmandu
-locale:              your locale language # eg. en_us
-name:				 site name
-title:               site title
+timezone:            Asia/China # eg. Asia/Kathmandu
+locale:              cn # eg. en_us
+name:				 CO-THINGS Tech
+title:               CO-THINGS Tech
 tagline:             'tagline'
 description:         'description'
 url:                 site url
