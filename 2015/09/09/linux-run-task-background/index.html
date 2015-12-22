@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+  <meta name="keywords" content="linux,nohup," />
 
 
 
@@ -37,15 +37,19 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="VincentChan's Blog">
-<meta property="og:url" content="http://vincentchan.cn/index.html">
+<meta name="description" content="有时候我们需要远程登录到linux执行一些长时间的任务，通常情况下我们都是为每一个这样的任务开一个远程终端窗口，由于他们执行的时间太长了。必须等待它执行完毕，在此期间可不能关掉窗口或者断开连接，否则这个任务就会被kill掉，一切半途而废了。
+解决办法当用户注销或网络断开时，终端进程会收到HUP信号，导致关闭其所有子进程。所以解决办法有2种，一种是让进程忽略HUP信号，第二种是让进程不属于终端进程的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux后台执行任务技巧">
+<meta property="og:url" content="http://vincentchan.cn/2015/09/09/linux-run-task-background/index.html">
 <meta property="og:site_name" content="VincentChan's Blog">
-<meta property="og:description">
+<meta property="og:description" content="有时候我们需要远程登录到linux执行一些长时间的任务，通常情况下我们都是为每一个这样的任务开一个远程终端窗口，由于他们执行的时间太长了。必须等待它执行完毕，在此期间可不能关掉窗口或者断开连接，否则这个任务就会被kill掉，一切半途而废了。
+解决办法当用户注销或网络断开时，终端进程会收到HUP信号，导致关闭其所有子进程。所以解决办法有2种，一种是让进程忽略HUP信号，第二种是让进程不属于终端进程的">
+<meta property="og:updated_time" content="2015-09-09T13:49:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VincentChan's Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="linux后台执行任务技巧">
+<meta name="twitter:description" content="有时候我们需要远程登录到linux执行一些长时间的任务，通常情况下我们都是为每一个这样的任务开一个远程终端窗口，由于他们执行的时间太长了。必须等待它执行完毕，在此期间可不能关掉窗口或者断开连接，否则这个任务就会被kill掉，一切半途而废了。
+解决办法当用户注销或网络断开时，终端进程会收到HUP信号，导致关闭其所有子进程。所以解决办法有2种，一种是让进程忽略HUP信号，第二种是让进程不属于终端进程的">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -55,7 +59,7 @@
   };
 </script>
 
-  <title> VincentChan's Blog </title>
+  <title> linux后台执行任务技巧 | VincentChan's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -83,9 +87,7 @@
 
 
 
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container one-column page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -161,9 +163,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div id="content" class="content"> 
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -174,9 +176,7 @@
           
           
             
-              <a class="post-title-link" href="/2015/09/09/linux-run-task-background/" itemprop="url">
-                linux后台执行任务技巧
-              </a>
+              linux后台执行任务技巧
             
           
         </h1>
@@ -211,8 +211,7 @@
       
 
       
-        
-          <span itemprop="articleBody"><p>有时候我们需要远程登录到linux执行一些长时间的任务，通常情况下我们都是为每一个这样的任务开一个远程终端窗口，由于他们执行的时间太长了。必须等待它执行完毕，在此期间可不能关掉窗口或者断开连接，否则这个任务就会被kill掉，一切半途而废了。</p>
+        <span itemprop="articleBody"><p>有时候我们需要远程登录到linux执行一些长时间的任务，通常情况下我们都是为每一个这样的任务开一个远程终端窗口，由于他们执行的时间太长了。必须等待它执行完毕，在此期间可不能关掉窗口或者断开连接，否则这个任务就会被kill掉，一切半途而废了。</p>
 <h2 id="解决办法">解决办法</h2><p>当用户注销或网络断开时，终端进程会收到HUP信号，导致关闭其所有子进程。所以解决办法有2种，一种是让进程忽略HUP信号，第二种是让进程不属于终端进程的子进程</p>
 <h2 id="使用nohup命令">使用nohup命令</h2><p>nohup的用途就是让进程忽略HUP信号，属于第一种解决办法</p>
 <pre>
@@ -272,313 +271,58 @@ init─
 
 <p>可以看到ping进程并不是sshd的子进程，所以该方法属于第一种解决办法</p>
 </span>
-        
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/nohup/" rel="tag">#nohup</a>
+          
+        </div>
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/09/shadowsocks/" rel="next">ubuntu下使用shadowsocks翻墙</a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </article>
 
 
-    
-      
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/09/shadowsocks/" itemprop="url">
-                ubuntu下使用shadowsocks翻墙
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-09T14:25:56+08:00" content="2015-09-09">
-            2015-09-09
-          </time>
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/09/09/shadowsocks/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/09/shadowsocks/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>安装shadowsocks客户端</p>
-<pre>
-apt-get install python-pip
-pip install shadowsocks
-</pre>
-
-<p>启动客户端</p>
-<pre>
-sslocal -s 服务器地址 -p 服务器端口号 -k 密码 -m 加密方式 -b 本地绑定地址(默认127.0.0.1) -l 本地端口(默认1080)
-</pre>
-
-<p>安装proxychains</p>
-<pre>
-apt-get install proxychains
-</pre>
-
-<p>配置代理(配置文件在/etc/proxychains.conf)</p>
-<pre>
-[ProxyList]
-#添加socks5代理
-socks5 127.0.0.1 1080(上面填写的本地端口)
-</pre>
-
-<p>添加dns服务器地址(配置文件在/etc/resolv.conf)</p>
-<pre>
-nameserver 8.8.8.8 #谷歌提供的免费dns服务器
-</pre>
-
-<p>使用curl访问google</p>
-<pre>
-# proxychains curl -I https://www.google.com
-ProxyChains-3.1 (http://proxychains.sf.net)
-|DNS-request| www.google.com
-|S-chain|-<>-127.0.0.1:1080-<><>-4.2.2.2:53-<><>-OK
-|DNS-response| www.google.com is 173.194.126.179
-|S-chain|-<>-127.0.0.1:1080-<><>-173.194.126.179:443-<><>-OK
-HTTP/1.1 200 OK
-Date: Wed, 09 Sep 2015 12:58:53 GMT
-Expires: -1
-Cache-Control: private, max-age=0
-Content-Type: text/html; charset=ISO-8859-1
-P3P: CP="This is not a P3P policy! See http://www.google.com/support/accounts/bin/answer.py?hl=en&answer=151657 for more info."
-Server: gws
-X-XSS-Protection: 1; mode=block
-X-Frame-Options: SAMEORIGIN
-Set-Cookie: PREF=ID=1111111111111111:FF=0:TM=1441803533:LM=1441803533:V=1:S=ZZL3s3ts4E-__6Wr; expires=Thu, 31-Dec-2015 16:02:17 GMT; path=/; domain=.google.com
-Set-Cookie: NID=71=6MmRI5WPLzF7ebj5odB33N_QcNeSZa0iCUfmWYTjRKkEtymNJzFgdJKtNK0dLUFQDdZ1QjcW4e_nEjm-P1bTMkFWoBIIfwyZAmUU-bJ6JnvsuuVqxE93XGJNfyQwW5uX; expires=Thu, 10-Mar-2016 12:58:53 GMT; path=/; domain=.google.com; HttpOnly
-Alternate-Protocol: 443:quic,p=1
-Alt-Svc: quic=":443"; p="1"; ma=604800
-Transfer-Encoding: chunked
-Accept-Ranges: none
-Vary: Accept-Encoding
-</pre>
-
-<p>妈妈再也不用担心我上不了谷歌啦!</p>
-</span>
-        
+    <div class="post-spread">
       
     </div>
+  </div>
 
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/09/hydra/" itemprop="url">
-                hydra教程
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-09T10:53:53+08:00" content="2015-09-09">
-            2015-09-09
-          </time>
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/09/09/hydra/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/09/hydra/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>hydra是一款用于暴力破解的工具,支持HTTP/HTTPS/Mysql/ssh等协议,至于有什么用,你懂的…</p>
-<h2 id="下载">下载</h2><pre>wget https://www.thc.org/download.php?t=r&f=hydra-8.1.tar.gz</pre>
-
-<h2 id="用法">用法</h2><pre>
-hydra
-       [[[-l LOGIN|-L FILE] [-p PASS|-P FILE|-x OPT]] | [-C FILE]] [-e nsr]
-       [-u] [-f] [-F] [-M FILE] [-o FILE] [-t TASKS] [-w TIME] [-W TIME]
-       [-s PORT] [-S] [-4/6] [-vV] [-d]
-       server service [OPTIONAL_SERVICE_PARAMETER]
-
-
--R
-继续从上一次进度接着破解
--S
-大写，采用SSL链接
--s <port>
-小写，可通过这个参数指定非默认端口
--l <login>
-指定破解的用户，对特定用户破解
--L <file>
-指定用户名字典
--p <pass>
-小写，指定密码破解，少用，一般是采用密码字典
--P <file>
-大写，指定密码字典
--e <ns>
-可选选项，n：空密码试探，s：使用指定用户和密码试探
--C < FILE>
-使用冒号分割格式，例如“登录名:密码”来代替-L/-P参数
--M < FILE>
-指定目标列表文件一行一条
--o < FILE>
-指定结果输出文件
--f
-在使用-M参数以后，找到第一对登录名或者密码的时候中止破解
--t < TASKS>
-同时运行的线程数，默认为16
--w < TIME>
-设置最大超时的时间，单位秒，默认是30s
--v / -V
-显示详细过程
-server
-目标ip
-service
-指定服务名，支持的服务和协议：telnet ftp pop3[-ntlm] imap[-ntlm] smb smbnt http[s]-{head|get} http-{get|post}-form http-proxy cisco cisco-enable vnc ldap2 ldap3 mssql mysql oracle-listener postgres nntp socks5 rexec rlogin pcnfs snmp rsh cvs svn icq sapr3 ssh2 smtp-auth[-ntlm] pcanywhere teamspeak sip vmauthd firebird ncp afp等等
-OPT
-可选项
-</ns></file></pass></file></login></port></pre>
-
-<h2 id="实例">实例</h2><p>破解http登录(GET/POST)</p>
-<pre>
-hydra -L 用户名 -P 密码字典 -t 线程 -s 端口 ip http-[get|post]-form '/path:param1=参数1:account=^USER^&password=^PASS^:错误提示:H=Cookies\: a=b'
-</pre>
-
-<p><code>^USER^</code>表示账号 <code>^PASS^</code>表示密码<br>PS:要注意对参数里面的冒号转义</p>
-<p>破解redis</p>
-<pre>
-hydra -P 密码字典 -s 端口 ip redis
-</pre>
-
-
-<h2 id="HTTP登录破解测试">HTTP登录破解测试</h2><p>创建页面<code>test.php</code>,当输入用户名为<code>admin</code>,密码为<code>asdasd</code>时,页面输出<code>success</code>,否则为<code>error</code><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">"/test.php"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">  &lt;input type=<span class="string">"text"</span> name=<span class="string">"account"</span>/&gt;</span><br><span class="line">  &lt;input type=<span class="string">"text"</span> name=<span class="string">"password"</span>/&gt;</span><br><span class="line">  &lt;input type=<span class="string">"submit"</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">'account'</span>])&amp;&amp;<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">'password'</span>])&amp;&amp;<span class="variable">$_POST</span>[<span class="string">'account'</span>]==<span class="string">'admin'</span>&amp;&amp;<span class="variable">$_POST</span>[<span class="string">'password'</span>]==<span class="string">'asdasd'</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'success'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'error'</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
-<p>创建账号密码字典<code>account.txt</code>,<code>password.txt</code></p>
-<pre>
-# cat account.txt
-john
-admin
-root
-# cat password.txt
-123
-aaaaaa
-123456
-password
-asdasd
-test
-</pre>
-
-<p>指定字典，开始暴力破解</p>
-<pre>
-# hydra -L account.txt -P password.txt -s 8080 127.0.0.1 http-post-form '/test.php:account=^USER^&password=^PASS^:error' -t 4
-Hydra v8.2-dev (c) 2014 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
-
-Hydra (http://www.thc.org/thc-hydra) starting at 2015-09-09 20:54:11
-[DATA] max 4 tasks per 1 server, overall 64 tasks, 40 login tries (l:5/p:8), ~0 tries per task
-[DATA] attacking service http-post-form on port 8080
-[8080][http-post-form] host: 127.0.0.1   login: admin   password: asdasd
-1 of 1 target successfully completed, 1 valid password found
-Hydra (http://www.thc.org/thc-hydra) finished at 2015-09-09 20:54:11
-</pre>
-
-<p>账号密码被破解出来啦！</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
  </div>
 
         
 
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/09/09/linux-run-task-background/"
+                   data-title="linux后台执行任务技巧" data-url="http://vincentchan.cn/2015/09/09/linux-run-task-background/">
+              </div>
+            
+          </div>
         
       </div>
 
@@ -595,6 +339,15 @@ Hydra (http://www.thc.org/thc-hydra) finished at 2015-09-09 20:54:11
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
 
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
       
 
       <section class="site-overview">
@@ -648,6 +401,17 @@ Hydra (http://www.thc.org/thc-hydra) finished at 2015-09-09 20:54:11
 
       </section>
 
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">1.</span> <span class="nav-text">解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用nohup命令"><span class="nav-number">2.</span> <span class="nav-text">使用nohup命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用setsid命令"><span class="nav-number">3.</span> <span class="nav-text">使用setsid命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用screen命令"><span class="nav-number">4.</span> <span class="nav-text">使用screen命令</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
       
 
     </div>
@@ -732,6 +496,165 @@ Hydra (http://www.thc.org/thc-hydra) finished at 2015-09-09 20:54:11
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
 
   <script type="text/javascript">
     $(document).ready(function () {

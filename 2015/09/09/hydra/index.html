@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+  <meta name="keywords" content="渗透," />
 
 
 
@@ -37,15 +37,31 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="VincentChan's Blog">
-<meta property="og:url" content="http://vincentchan.cn/index.html">
+<meta name="description" content="hydra是一款用于暴力破解的工具,支持HTTP/HTTPS/Mysql/ssh等协议,至于有什么用,你懂的…
+下载wget https://www.thc.org/download.php?t=r&amp;f=hydra-8.1.tar.gz
+
+用法
+hydra
+       [[[-l LOGIN|-L FILE] [-p PASS|-P FILE|-x OPT]] | [-C FILE]] [-e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hydra教程">
+<meta property="og:url" content="http://vincentchan.cn/2015/09/09/hydra/index.html">
 <meta property="og:site_name" content="VincentChan's Blog">
-<meta property="og:description">
+<meta property="og:description" content="hydra是一款用于暴力破解的工具,支持HTTP/HTTPS/Mysql/ssh等协议,至于有什么用,你懂的…
+下载wget https://www.thc.org/download.php?t=r&amp;f=hydra-8.1.tar.gz
+
+用法
+hydra
+       [[[-l LOGIN|-L FILE] [-p PASS|-P FILE|-x OPT]] | [-C FILE]] [-e">
+<meta property="og:updated_time" content="2015-09-09T13:09:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VincentChan's Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="hydra教程">
+<meta name="twitter:description" content="hydra是一款用于暴力破解的工具,支持HTTP/HTTPS/Mysql/ssh等协议,至于有什么用,你懂的…
+下载wget https://www.thc.org/download.php?t=r&amp;f=hydra-8.1.tar.gz
+
+用法
+hydra
+       [[[-l LOGIN|-L FILE] [-p PASS|-P FILE|-x OPT]] | [-C FILE]] [-e">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -55,7 +71,7 @@
   };
 </script>
 
-  <title> VincentChan's Blog </title>
+  <title> hydra教程 | VincentChan's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -83,9 +99,7 @@
 
 
 
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container one-column page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -161,9 +175,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div id="content" class="content"> 
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -174,259 +188,7 @@
           
           
             
-              <a class="post-title-link" href="/2015/09/09/linux-run-task-background/" itemprop="url">
-                linux后台执行任务技巧
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-09T15:45:54+08:00" content="2015-09-09">
-            2015-09-09
-          </time>
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/09/09/linux-run-task-background/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/09/linux-run-task-background/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>有时候我们需要远程登录到linux执行一些长时间的任务，通常情况下我们都是为每一个这样的任务开一个远程终端窗口，由于他们执行的时间太长了。必须等待它执行完毕，在此期间可不能关掉窗口或者断开连接，否则这个任务就会被kill掉，一切半途而废了。</p>
-<h2 id="解决办法">解决办法</h2><p>当用户注销或网络断开时，终端进程会收到HUP信号，导致关闭其所有子进程。所以解决办法有2种，一种是让进程忽略HUP信号，第二种是让进程不属于终端进程的子进程</p>
-<h2 id="使用nohup命令">使用nohup命令</h2><p>nohup的用途就是让进程忽略HUP信号，属于第一种解决办法</p>
-<pre>
-NOHUP(1)                                                 User Commands                                                NOHUP(1)
-
-NAME
-       nohup - run a command immune to hangups, with output to a non-tty
-</pre>
-
-<pre>
-# nohup ping www.baidu.com > /dev/null 2>&1 &
-[1] 13210
-# ps -ef | grep ping
-root     13210 12621  0 21:01 pts/22   00:00:00 ping www.baidu.com
-</pre>
-
-<p>默认情况下，标准输出和错误输出会重定向到nohup.out文件上</p>
-<h2 id="使用setsid命令">使用setsid命令</h2><p>在一个新的会话中运行命令,属于第二种解决办法</p>
-<pre>
-SETSID(1)                                                User Commands                                               SETSID(1)
-
-NAME
-       setsid - run a program in a new session
-</pre>
-
-<pre>
-# setsid ping www.baidu.com > /dev/null 2>&1
-# ps -ef | grep ping
-root     13260     1  0 21:03 ?        00:00:00 ping www.baidu.com
-</pre>
-
-<p>此时进程的父进程id变成init进程id，而不是终端进程的id</p>
-<h2 id="使用screen命令">使用screen命令</h2><pre>
-SCREEN(1)                                           General Commands Manual                                          SCREEN(1)
-
-NAME
-       screen - screen manager with VT100/ANSI terminal emulation
-</pre>
-
-<p>常用命令<br>screen -dmS 会话名 :建立一个处于断开模式下的会话<br>screen -list :列出所有会话<br>screen -r 会话名 :重新连接指定会话<br>快捷键CTRL-a d :暂时断开当前会话</p>
-<pre>
-# screen -dmS mysession
-# screen -list
-There is a screen on:
-        15966.mysession (09/09/2015 09:43:06 PM)        (Detached)
-        1 Socket in /var/run/screen/S-root.
-
-# screen -r mysession
-# ping www.baidu.com > /dev/null 2>&1
-# pstree
-init─
-     ├─screen───zsh───ping
-     ├─snmpd
-     ├─sshd─┬─sshd───zsh
-     │      └─sshd───zsh───tmux
-</pre>
-
-<p>可以看到ping进程并不是sshd的子进程，所以该方法属于第一种解决办法</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/09/shadowsocks/" itemprop="url">
-                ubuntu下使用shadowsocks翻墙
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-09T14:25:56+08:00" content="2015-09-09">
-            2015-09-09
-          </time>
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/09/09/shadowsocks/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/09/shadowsocks/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>安装shadowsocks客户端</p>
-<pre>
-apt-get install python-pip
-pip install shadowsocks
-</pre>
-
-<p>启动客户端</p>
-<pre>
-sslocal -s 服务器地址 -p 服务器端口号 -k 密码 -m 加密方式 -b 本地绑定地址(默认127.0.0.1) -l 本地端口(默认1080)
-</pre>
-
-<p>安装proxychains</p>
-<pre>
-apt-get install proxychains
-</pre>
-
-<p>配置代理(配置文件在/etc/proxychains.conf)</p>
-<pre>
-[ProxyList]
-#添加socks5代理
-socks5 127.0.0.1 1080(上面填写的本地端口)
-</pre>
-
-<p>添加dns服务器地址(配置文件在/etc/resolv.conf)</p>
-<pre>
-nameserver 8.8.8.8 #谷歌提供的免费dns服务器
-</pre>
-
-<p>使用curl访问google</p>
-<pre>
-# proxychains curl -I https://www.google.com
-ProxyChains-3.1 (http://proxychains.sf.net)
-|DNS-request| www.google.com
-|S-chain|-<>-127.0.0.1:1080-<><>-4.2.2.2:53-<><>-OK
-|DNS-response| www.google.com is 173.194.126.179
-|S-chain|-<>-127.0.0.1:1080-<><>-173.194.126.179:443-<><>-OK
-HTTP/1.1 200 OK
-Date: Wed, 09 Sep 2015 12:58:53 GMT
-Expires: -1
-Cache-Control: private, max-age=0
-Content-Type: text/html; charset=ISO-8859-1
-P3P: CP="This is not a P3P policy! See http://www.google.com/support/accounts/bin/answer.py?hl=en&answer=151657 for more info."
-Server: gws
-X-XSS-Protection: 1; mode=block
-X-Frame-Options: SAMEORIGIN
-Set-Cookie: PREF=ID=1111111111111111:FF=0:TM=1441803533:LM=1441803533:V=1:S=ZZL3s3ts4E-__6Wr; expires=Thu, 31-Dec-2015 16:02:17 GMT; path=/; domain=.google.com
-Set-Cookie: NID=71=6MmRI5WPLzF7ebj5odB33N_QcNeSZa0iCUfmWYTjRKkEtymNJzFgdJKtNK0dLUFQDdZ1QjcW4e_nEjm-P1bTMkFWoBIIfwyZAmUU-bJ6JnvsuuVqxE93XGJNfyQwW5uX; expires=Thu, 10-Mar-2016 12:58:53 GMT; path=/; domain=.google.com; HttpOnly
-Alternate-Protocol: 443:quic,p=1
-Alt-Svc: quic=":443"; p="1"; ma=604800
-Transfer-Encoding: chunked
-Accept-Ranges: none
-Vary: Accept-Encoding
-</pre>
-
-<p>妈妈再也不用担心我上不了谷歌啦!</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/09/hydra/" itemprop="url">
-                hydra教程
-              </a>
+              hydra教程
             
           
         </h1>
@@ -461,8 +223,7 @@ Vary: Accept-Encoding
       
 
       
-        
-          <span itemprop="articleBody"><p>hydra是一款用于暴力破解的工具,支持HTTP/HTTPS/Mysql/ssh等协议,至于有什么用,你懂的…</p>
+        <span itemprop="articleBody"><p>hydra是一款用于暴力破解的工具,支持HTTP/HTTPS/Mysql/ssh等协议,至于有什么用,你懂的…</p>
 <h2 id="下载">下载</h2><pre>wget https://www.thc.org/download.php?t=r&f=hydra-8.1.tar.gz</pre>
 
 <h2 id="用法">用法</h2><pre>
@@ -554,31 +315,56 @@ Hydra (http://www.thc.org/thc-hydra) finished at 2015-09-09 20:54:11
 
 <p>账号密码被破解出来啦！</p>
 </span>
-        
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/渗透/" rel="tag">#渗透</a>
+          
+        </div>
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/09/shadowsocks/" rel="prev">ubuntu下使用shadowsocks翻墙</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
  </div>
 
         
 
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/09/09/hydra/"
+                   data-title="hydra教程" data-url="http://vincentchan.cn/2015/09/09/hydra/">
+              </div>
+            
+          </div>
         
       </div>
 
@@ -595,6 +381,15 @@ Hydra (http://www.thc.org/thc-hydra) finished at 2015-09-09 20:54:11
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
 
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
       
 
       <section class="site-overview">
@@ -648,6 +443,17 @@ Hydra (http://www.thc.org/thc-hydra) finished at 2015-09-09 20:54:11
 
       </section>
 
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载"><span class="nav-number">1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">2.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP登录破解测试"><span class="nav-number">4.</span> <span class="nav-text">HTTP登录破解测试</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
       
 
     </div>
@@ -732,6 +538,165 @@ Hydra (http://www.thc.org/thc-hydra) finished at 2015-09-09 20:54:11
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
 
   <script type="text/javascript">
     $(document).ready(function () {
