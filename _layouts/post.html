@@ -1,91 +1,93 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {% include head.html %}
-    </head>
+---
+layout: default
+---
+<article class="postWrapper">
+  <section class="section--first is-darkBackgrounded u-table">
+    <div class="section-backgroundImage">
 
-    <body>
-        {% include svg.html %}
-        <header class="head">
-            {% include header.html %}
-            {% include nav.html %}
-        </header>
-        {% include search.html %}
-        <section class="margin">
-            <div class="content">
-                <div class="content_container">
-                    <article>
-                        {% if page.type == "vimeo" %}
-                            {% if page.vimeo-embed %}
-                                <div class="video_container">
-                                    {{ page.vimeo-embed }}
-                                </div>
-                            {% endif %}
-                        {% elsif page.type == "youtube" %}
-                            {% if page.yt-video-id %}
-                                <div class="video_container">
-                                    <iframe src="https://www.youtube.com/embed/{{page.yt-video-id}}?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
-                                </div>
-                            {% endif %}
-                        {% elsif page.type == "image" or page.type == "gallery" %}
-                            {% if page.featimg %}
-                                <img class="featimg" src="{{ site.media_folder | prepend: site.baseurl | replace: '//', '/'}}/{{ page.featimg }}" alt="{{ page.featimg }}">
-                            {% endif %}
-                        {% elsif page.type == "audio" %}
-                            {% if page.audio-embed %}
-                                {{ page.audio-embed }}
-                            {% endif %}
-                        {% endif %}
+      {% if page.image.feature %}
+        <img class="post-featuredImage" src="{{ page.image.feature | prepend: site.baseurl_featured_img }}" style="
+        {% if page.image.topPosition %}
+          top:{{ page.image.topPosition }};
+        {% endif %}
+        " alt="">
+      {% endif %}
 
-                        <h1 class="post_title">
-                            {{ page.title }}
-                        </h1>
-                        <div class="meta">
-                            {% include author.html%} &bull;
-                            <span class="date">
-                                Published on {{ page.date | date: '%B %d, %Y' }}
-                            </span>
-                        </div>
-                        {% if page.type == "standard" %}
-                            {% if page.featimg %}
-                                <img class="featimg" src="{{ site.media_folder | prepend: site.baseurl | replace: '//', '/'}}/{{ page.featimg }}" alt="{{ page.featimg }}">
-                            {% endif %}
-                        {% endif %}
-                        <div class="post_content">
-                            {{ content }}
-                        </div>
-                        {% if page.category || page.tags %}
-                        <div class="catsandtags">
-                            {% if page.category %}
-                            <p class="category">
-                                <span class="name">Categories:</span>
-                                {{ page.categories | category_links }}
-                            </p>
-                            {% endif %}
-                            {% if page.tags %}
-                            <p class="tags">
-                                <span class="name">Tags:</span>
-                                {% for tag in page.tags %}
-                                    <a href="{{ site.tag_dir | prepend: site.baseurl | replace: '//', '/' }}/{{ tag }}">{{ tag }}</a>
-                                {% endfor %}
-                            </p>
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    </article>
-                    <div class="post_nav">
-                        {% if page.previous.url %}
-                        <a class="prev" href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}"><i class="fa fa-angle-left"></i><span class="short"> prev</span><span class="long">ious post</span></a>
-                        {% endif %}
-                        {% if page.next.url %}
-                        <a class="next" href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}"><span class="short">next </span><span class="long">post </span><i class="fa fa-angle-right"></i></a>
-                        {% endif %}
-                    </div>
-                </div>
-                {% include sidebar.html %}
-            </div>
-        </section>
-        {% include footer.html %}
-        <script src="{{ site.baseurl | replace: '//', '/' }}/js/build/global.min.js"></script>
-    </body>
-</html>
+    </div>
+    <div class="section-gradient
+    {% if page.bgGradientOpacity == "darker" %}
+      section-gradient--darker
+    {% elsif page.bgGradientOpacity == "lighter" %}
+      section-gradient--lighter
+    {% endif %}
+    "></div>
+    <div class="section-title is-darkBackgrounded u-tableCell u-verticalAlignMiddle">
+      <div class="container">
+        <h2>{{ page.title }}</h2>
+        <div class="postMeta-wrapper">
+          <ul class="postMeta">
+            <li class="postMeta-datetime">
+              <time datetime="{{ page.date }}">
+                {{ page.date | date_to_string }}
+              </time>
+            </li>
+            <li class="postMeta-author">
+              By {{ site.author.name }}
+            </li>
+            <li class="postMeta-tags">
+              {{ page.categories }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section--last">
+    <div class="container container--content">
+      <div class="content-body">
+
+        {{ content }}
+
+      </div>
+    </div>
+    <hr class="u-clearHr"/>
+    <hr class="u-clearHr"/>
+    <hr/>
+    <div class="container container--content">
+      <div class="content-body">
+        {% include subscribe.html %}
+        {% include comments.html %}
+      </div>
+    </div>
+  </section>
+  <footer class="postFooter">
+    {% if page.previous.url %}
+      <section class="section--prePost is-darkBackgrounded u-table">
+        <div class="section-backgroundImage section-backgroundImage--previousPage">
+          <img class="post-featuredImage"
+          {% if page.previous.image.feature %}
+            src="{{ page.previous.image.feature | prepend: site.baseurl_featured_img }}"
+          {% endif %}
+          style="top:0" alt="">
+        </div>
+        <div class="section-gradient
+        {% if page.previous.bgGradientOpacity == "darker" %}
+          section-gradient--darker
+        {% elsif page.previous.bgGradientOpacity == "lighter" %}
+          section-gradient--lighter
+        {% endif %}
+        "></div>
+        <div class="section-title u-tableCell u-verticalAlignMiddle">
+          <div class="container">
+            <h4>Next story:</h4>
+            <a class="prev" href="{{ page.previous.url | prepend: site.baseurl }}">
+              <h2>{{page.previous.title}}</h2>
+            </a>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+  </footer>
+</article>
+
+{% include modal.html %}
